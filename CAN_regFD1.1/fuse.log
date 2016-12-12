@@ -1,0 +1,44 @@
+Running: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_testbench_isim_beh.exe -prj C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_testbench_beh.prj work.can_testbench work.glbl 
+ISim P.20131013 (signature 0x7708f090)
+Number of CPUs detected in this system: 8
+Turning on mult-threading, number of parallel sub-compilation jobs: 16 
+Determining compilation order of HDL files
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_register_asyn_syn.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_register_asyn.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_register.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_ibo.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_fifo.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_crc.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_acf.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_registers.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_btl.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_bsp.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_top.v" into library work
+Analyzing Verilog file "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_testbench.v" into library work
+Analyzing Verilog file "C:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+Completed static elaboration
+Compiling module can_register_asyn_syn(WIDTH=1,RE...
+Compiling module can_register_asyn(WIDTH=4)
+Compiling module can_register_asyn(WIDTH=3)
+Compiling module can_register_asyn_syn(WIDTH=1,RE...
+Compiling module can_register_asyn_syn(WIDTH=2,RE...
+Compiling module can_register
+Compiling module can_register_asyn(RESET_VALUE=96...
+Compiling module can_register_asyn(WIDTH=1)
+Compiling module can_registers
+Compiling module can_btl
+Compiling module can_crc
+Compiling module can_acf
+Compiling module can_fifo
+Compiling module can_ibo
+Compiling module can_bsp
+Compiling module can_top
+Compiling module can_testbench
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 3 sub-compilation(s) to finish...
+Compiled 18 Verilog Units
+Built simulation executable C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_testbench_isim_beh.exe
+Fuse Memory Usage: 43380 KB
+Fuse CPU Usage: 812 ms
