@@ -305,6 +305,20 @@ begin
   extended_mode = 0;
   tx_bypassed = 0;
 
+    rst_i = 1'b0;
+    ale_i = 1'b0;
+    rd_i  = 1'b0;
+    wr_i  = 1'b0;
+    ale2_i = 1'b0;
+    rd2_i  = 1'b0;
+    wr2_i  = 1'b0;
+    port_0_o = 8'h0;
+    port_0_en = 0;
+    port_free = 1;
+    rst_i = 1;
+    #200 rst_i = 0;
+    #200 start_tb = 1;
+
 end
 
 
