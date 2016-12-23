@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2016-12-07T14:54:04</DateModified>
+  <DateModified>2016-12-23T11:53:20</DateModified>
   <ModuleName>can_top</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/iseconfig/can_top.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN</ImplementationReportsDirectory>
+  <SavedFilePath>C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/CANcanMQP/iseconfig/can_top.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/CANcanMQP\</ImplementationReportsDirectory>
   <DateInitialized>2016-12-07T14:53:16</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

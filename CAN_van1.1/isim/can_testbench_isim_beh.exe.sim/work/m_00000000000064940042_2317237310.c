@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_crc.v";
+static const char *ng0 = "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/CANcanMQP/can_crc.v";
 static unsigned int ng1[] = {0U, 0U};
 static unsigned int ng2[] = {17817U, 0U};
 

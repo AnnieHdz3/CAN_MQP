@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/OpenCoresCAN/can_ibo.v";
+static const char *ng0 = "C:/Users/Forte/Videos/- WPI Class Stuff/MQP - CANBUS/CANcanMQP/can_ibo.v";
 
 
 

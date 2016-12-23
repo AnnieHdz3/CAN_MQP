@@ -453,7 +453,7 @@ wire read_irq_reg = read & (addr == 8'd3);
 assign read_arbitration_lost_capture_reg = read & extended_mode & (addr == 8'd11);
 assign read_error_code_capture_reg = read & extended_mode & (addr == 8'd12);
 
-/* This section is for BASIC and EXTENDED mode */
+/* This section is for BASIC and EXTENDED mode */   ///If chip sel and write and ... are true, ...
 wire we_acceptance_code_0       = cs & we &   reset_mode  & ((~extended_mode) & (addr == 8'd4)  | extended_mode & (addr == 8'd16));
 wire we_acceptance_mask_0       = cs & we &   reset_mode  & ((~extended_mode) & (addr == 8'd5)  | extended_mode & (addr == 8'd20));
 wire we_tx_data_0               = cs & we & (~reset_mode) & ((~extended_mode) & (addr == 8'd10) | extended_mode & (addr == 8'd16)) & transmit_buffer_status;
@@ -472,7 +472,7 @@ wire we_tx_data_12              = cs & we & (~reset_mode) & (                   
 /* End: This section is for BASIC and EXTENDED mode */
 
 
-/* This section is for EXTENDED mode */
+/* This section is for EXTENDED mode only */
 wire   we_interrupt_enable      = cs & we & (addr == 8'd4)  & extended_mode;
 wire   we_error_warning_limit   = cs & we & (addr == 8'd13) & reset_mode & extended_mode;
 assign we_rx_err_cnt            = cs & we & (addr == 8'd14) & reset_mode & extended_mode;
@@ -565,7 +565,7 @@ can_register_asyn_syn #(1, 1'h0) COMMAND_REG1
   .rst_sync(sample_point & (tx_request | (abort_tx & ~transmitting)) | reset_mode)
 );
 
-can_register_asyn_syn #(2, 2'h0) COMMAND_REG
+can_register_asyn_syn #(2, 2'h0) COMMAND_REG     //both 2 & 3
 ( .data_in(data_in[3:2]),
   .data_out(command[3:2]),
   .we(we_command),
@@ -1081,14 +1081,14 @@ can_register #(8) ACCEPTANCE_MASK_REG3
 
 
 // Reading data from registers
-always @ ( addr or extended_mode or mode or bus_timing_0 or bus_timing_1 or clock_divider or
-           acceptance_code_0 or acceptance_code_1 or acceptance_code_2 or acceptance_code_3 or
-           acceptance_mask_0 or acceptance_mask_1 or acceptance_mask_2 or acceptance_mask_3 or
-           reset_mode or tx_data_0 or tx_data_1 or tx_data_2 or tx_data_3 or tx_data_4 or 
-           tx_data_5 or tx_data_6 or tx_data_7 or tx_data_8 or tx_data_9 or status or 
-           error_warning_limit or rx_err_cnt or tx_err_cnt or irq_en_ext or irq_reg or mode_ext or
-           arbitration_lost_capture or rx_message_counter or mode_basic or error_capture_code
-         )
+always @ ( addr                     or extended_mode     or mode                or bus_timing_0         or bus_timing_1   or
+           acceptance_code_0        or acceptance_code_1 or acceptance_code_2   or acceptance_code_3    or clock_divider  or
+           acceptance_mask_0        or acceptance_mask_1 or acceptance_mask_2   or acceptance_mask_3                      or
+           reset_mode               or tx_data_0          or tx_data_1   or tx_data_2    or tx_data_3   or tx_data_4      or 
+           tx_data_5                or tx_data_6          or tx_data_7   or tx_data_8    or tx_data_9   or status         or 
+           error_warning_limit      or rx_err_cnt         or tx_err_cnt  or irq_en_ext   or irq_reg     or mode_ext       or
+           arbitration_lost_capture or rx_message_counter or mode_basic  or error_capture_code
+         ) 
 begin
   case({extended_mode, addr[4:0]})  /* synthesis parallel_case */ 
     {1'h1, 5'd00} :  data_out = {4'b0000, mode_ext[3:1], mode[0]};      // extended mode

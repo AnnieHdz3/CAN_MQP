@@ -165,12 +165,6 @@ module can_fifo
   info_empty,
   info_cnt
 
-`ifdef CAN_BIST
-  ,
-  mbist_si_i,
-  mbist_so_o,
-  mbist_ctrl_i
-`endif
 );
 
 parameter Tp = 1;
@@ -190,12 +184,6 @@ output        overrun;
 output        info_empty;
 output  [6:0] info_cnt;
 
-`ifdef CAN_BIST
-input         mbist_si_i;
-output        mbist_so_o;
-input [`CAN_MBIST_CTRL_WIDTH - 1:0] mbist_ctrl_i;       // bist chain shift control
-wire          mbist_s_0;
-`endif
 
 `ifdef ALTERA_RAM
 `else

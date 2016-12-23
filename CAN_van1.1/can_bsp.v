@@ -356,15 +356,9 @@ module can_bsp  //bus sampler? looks like it does any reading required & catches
   go_error_frame,
   go_tx,
   send_ack
-
-  /* Bist */
-`ifdef CAN_BIST
-  ,
-  mbist_si_i,
-  mbist_so_o,
-  mbist_ctrl_i
-`endif
+  
 );
+
 
 parameter Tp = 1;
 
@@ -485,13 +479,6 @@ output        go_overload_frame;
 output        go_error_frame;
 output        go_tx;
 output        send_ack;
-
-/* Bist */
-`ifdef CAN_BIST
-input         mbist_si_i;
-output        mbist_so_o;
-input [`CAN_MBIST_CTRL_WIDTH - 1:0] mbist_ctrl_i;       // bist chain shift control
-`endif
 
 reg           reset_mode_q;
 reg     [5:0] bit_cnt;
@@ -1415,14 +1402,9 @@ can_fifo i_can_fifo
   .overrun(overrun),
   .info_empty(info_empty),
   .info_cnt(rx_message_counter)
-
-`ifdef CAN_BIST
-  ,
-  .mbist_si_i(mbist_si_i),
-  .mbist_so_o(mbist_so_o),
-  .mbist_ctrl_i(mbist_ctrl_i)
-`endif
 );
+
+
 
 
 // Transmitting error frame.

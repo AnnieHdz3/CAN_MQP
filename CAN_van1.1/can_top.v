@@ -213,67 +213,23 @@
 
 module can_top
 ( 
-  `ifdef CAN_WISHBONE_IF
-    wb_clk_i,
-    wb_rst_i,
-    wb_dat_i,
-    wb_dat_o,
-    wb_cyc_i,
-    wb_stb_i,
-    wb_we_i,
-    wb_adr_i,
-    wb_ack_o,
-  `else
     rst_i,
     ale_i,
     rd_i,
     wr_i,
     port_0_io,
     cs_can_i,
-  `endif
+  
   clk_i,
   rx_i,
   tx_o,
   bus_off_on,
   irq_on,
   clkout_o
-
-  // Bist
-`ifdef CAN_BIST
-  ,
-  // debug chain signals
-  mbist_si_i,       // bist scan serial in
-  mbist_so_o,       // bist scan serial out
-  mbist_ctrl_i        // bist chain shift control
-`endif
 );
 
-parameter Tp = 1;
+parameter Tp = 1;  //Timing parameter
 
-
-`ifdef CAN_WISHBONE_IF
-  input        wb_clk_i;
-  input        wb_rst_i;
-  input  [7:0] wb_dat_i;
-  output [7:0] wb_dat_o;
-  input        wb_cyc_i;
-  input        wb_stb_i;
-  input        wb_we_i;
-  input  [7:0] wb_adr_i;
-  output       wb_ack_o;
-
-  reg          wb_ack_o;
-  reg          cs_sync1;
-  reg          cs_sync2;
-  reg          cs_sync3;
-  
-  reg          cs_ack1;
-  reg          cs_ack2;
-  reg          cs_ack3;
-  reg          cs_sync_rst1;
-  reg          cs_sync_rst2;
-  wire         cs_can_i;
-`else
   input        rst_i;
   input        ale_i;
   input        rd_i;
@@ -284,7 +240,6 @@ parameter Tp = 1;
   reg    [7:0] addr_latched;
   reg          wr_i_q;
   reg          rd_i_q;
-`endif
 
 input        clk_i;
 input        rx_i;
@@ -293,15 +248,7 @@ output       bus_off_on;
 output       irq_on;
 output       clkout_o;
 
-// Bist
-`ifdef CAN_BIST
-input   mbist_si_i;       // bist scan serial in
-output  mbist_so_o;       // bist scan serial out
-input [`CAN_MBIST_CTRL_WIDTH - 1:0] mbist_ctrl_i;       // bist chain shift control
-`endif
-
 reg          data_out_fifo_selected;
-
 
 wire   [7:0] data_out_fifo;
 wire   [7:0] data_out_regs;
@@ -730,7 +677,7 @@ can_bsp i_can_bsp
 
 
 //IGNORE
-`ifdef CAN_BIST
+`ifdef CAN_BIST                //IGNORE little section
   ,
   /* BIST signals */
   .mbist_si_i(mbist_si_i),
@@ -780,63 +727,7 @@ begin
 end
 
 
-//IGNORE
-`ifdef CAN_WISHBONE_IF
-
-  assign cs_can_i = 1'b1;
-
-  // Combining wb_cyc_i and wb_stb_i signals to cs signal. Than synchronizing to clk_i clock domain. 
-  always @ (posedge clk_i or posedge rst)
-  begin
-    if (rst)
-      begin
-        cs_sync1     <= 1'b0;
-        cs_sync2     <= 1'b0;
-        cs_sync3     <= 1'b0;
-        cs_sync_rst1 <= 1'b0;
-        cs_sync_rst2 <= 1'b0;
-      end
-    else
-      begin
-        cs_sync1     <=#Tp wb_cyc_i & wb_stb_i & (~cs_sync_rst2) & cs_can_i;
-        cs_sync2     <=#Tp cs_sync1            & (~cs_sync_rst2);
-        cs_sync3     <=#Tp cs_sync2            & (~cs_sync_rst2);
-        cs_sync_rst1 <=#Tp cs_ack3;
-        cs_sync_rst2 <=#Tp cs_sync_rst1;
-      end
-  end
-  
-  
-  assign cs = cs_sync2 & (~cs_sync3);
-  
-  
-  always @ (posedge wb_clk_i)
-  begin
-    cs_ack1 <=#Tp cs_sync3;
-    cs_ack2 <=#Tp cs_ack1;
-    cs_ack3 <=#Tp cs_ack2;
-  end
-  
-  
-  
-  // Generating acknowledge signal
-  always @ (posedge wb_clk_i)
-  begin
-    wb_ack_o <=#Tp (cs_ack2 & (~cs_ack3));
-  end
-
-
-  assign rst      = wb_rst_i;
-  assign we       = wb_we_i;
-  assign addr     = wb_adr_i;
-  assign data_in  = wb_dat_i;
-  assign wb_dat_o = data_out;
-
-
-`else
-
-  // START PAYING ATENTION AGAIN
-  // Latching address
+// Latching address
   always @ (posedge clk_i or posedge rst)
   begin
     if (rst)
@@ -846,7 +737,7 @@ end
   end
 
 
-  // Generating delayed wr_i and rd_i signals
+// Generating delayed wr_i and rd_i signals    //write or read
   always @ (posedge clk_i or posedge rst)
   begin
     if (rst)
@@ -870,8 +761,6 @@ end
   assign addr      = addr_latched;
   assign data_in   = port_0_io;
   assign port_0_io = (cs_can_i & rd_i)? data_out : 8'hz;
-
-`endif
 
 
 endmodule

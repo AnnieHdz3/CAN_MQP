@@ -79,7 +79,7 @@ module can_register_syn
   rst_sync
 );
 
-parameter WIDTH = 8; // default parameter of the register width
+parameter WIDTH = 8; // default parameter of the register width, ALL REGS IN THIS PROJECT ARE 8BIT
 parameter RESET_VALUE = 0;
 
 input [WIDTH-1:0] data_in;
